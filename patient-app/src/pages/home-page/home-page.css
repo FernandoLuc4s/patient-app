@@ -1,4 +1,6 @@
 ion-content{
     --ion-background-color: #fff;
 }
-
+#searchbar{
+    background-color: #000000c7;
+}
