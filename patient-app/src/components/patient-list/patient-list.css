@@ -1,0 +1,14 @@
+#loader{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100%;
+width: 100%;
+p{
+    margin-top: '10px';
+    font-size: '18px';
+    color: black;
+}
+
+}

@@ -3,5 +3,6 @@ ion-header{
     
 }
 img {
-    max-width: 15% !important;
+    width: 10%;
+    margin-top: 1%;
 }
