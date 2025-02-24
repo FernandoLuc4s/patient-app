@@ -23,6 +23,12 @@ const GET_PATIENTS = gql`
       }
       email
       phone
+      adress{
+        city
+        street
+        number
+        zipcode
+      }
     }
   }
 `;

@@ -1,8 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { listPatient } from "../../services/listPatients";
-import { IonList, IonItem, IonLabel } from "@ionic/react";
+import { IonList, IonItem, IonLabel, IonButton } from "@ionic/react";
+import { Link } from 'react-router-dom';
 import "./patient-list.css";
 import loadingGif from "../../assets/imgs/loader.gif";
+
+interface Patient {
+  id: string;
+  name: {
+    firstname: string;
+    lastname: string;
+  };
+  email: string;
+  phone: string;
+  address?: {
+    zipcode: string;
+    street: string;
+    city: string;
+    number: number;  
+  };
+}
 
 interface PatientsListProps {
   setIsLoading: (loading: boolean) => void;
@@ -10,7 +27,7 @@ interface PatientsListProps {
 }
 
 const PatientsList: React.FC<PatientsListProps> = ({ setIsLoading, searchQuery }) => {
-  const { data, loading, error } = listPatient();
+  const { data, loading, error } = listPatient(); 
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
@@ -26,7 +43,7 @@ const PatientsList: React.FC<PatientsListProps> = ({ setIsLoading, searchQuery }
     return (
       <div id="loader">
         <img src={loadingGif} alt="Carregando..." />
-        <p> Carregando... </p>
+        <p>Carregando...</p>
       </div>
     );
   }
@@ -35,7 +52,7 @@ const PatientsList: React.FC<PatientsListProps> = ({ setIsLoading, searchQuery }
 
   const search = searchQuery?.toLowerCase() || "";
 
-  const filteredUsers = (data?.users || []).filter((user: any) => {
+  const filteredUsers = (data?.users || []).filter((user: Patient) => {
     const firstName = user?.name?.firstname || "";
     const lastName = user?.name?.lastname || "";
     const fullName = `${firstName} ${lastName}`.toLowerCase();
@@ -46,13 +63,18 @@ const PatientsList: React.FC<PatientsListProps> = ({ setIsLoading, searchQuery }
   return (
     <IonList>
       {filteredUsers.length > 0 ? (
-        filteredUsers.map((user: any) => (
+        filteredUsers.map((user: Patient) => (
           <IonItem key={user.id}>
             <IonLabel>
-              <h2>{user.name?.firstname} {user.name?.lastname}</h2>
+              <h2>
+                {user.name?.firstname} {user.name?.lastname}
+              </h2>
               <p>{user.email}</p>
               <p>{user.phone}</p>
             </IonLabel>
+            <Link to={{ pathname: `/patient-detail/${user.id}`, state: { patient: user } }}>
+              <IonButton className="seeDetails">Ver Detalhes</IonButton>
+            </Link>
           </IonItem>
         ))
       ) : (

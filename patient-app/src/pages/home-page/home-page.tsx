@@ -12,7 +12,6 @@ const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("#fff");
 
- 
   useEffect(() => {
     if (!isLoading) {
       setBackgroundColor("#000");
