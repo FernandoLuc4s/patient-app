@@ -22,6 +22,7 @@ const GET_PATIENTS = gql`
         lastname
       }
       email
+      phone
     }
   }
 `;

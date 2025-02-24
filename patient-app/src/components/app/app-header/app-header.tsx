@@ -1,6 +1,6 @@
 import './app-header.css';
 import { IonHeader, IonTitle, IonToolbar } from '@ionic/react';
-import logo from '../../../assets/imgs/logo-medico.png'; 
+import logo from '../../../assets/imgs/logo.png'; 
 
 
 const AppHeader: React.FC = () => {
